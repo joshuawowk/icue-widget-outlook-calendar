@@ -1,0 +1,17 @@
+{
+  "author": "Josh Wowk",
+  "id": "net.jwowk.icue.outlookcalendar",
+  "name": "Outlook Calendar",
+  "description": "Agenda-style Outlook calendar for Xeneon Edge — dark theme with accent date tiles, day separators, locations, and a next-event countdown. Data is served by the xeneon-graph-proxy companion service.",
+  "version": "1.0.0",
+  "preview_icon": "resources/icon.png",
+  "min_framework_version": "1.0.0",
+  "os": [
+    { "platform": "windows" },
+    { "platform": "mac" }
+  ],
+  "supported_devices": [
+    { "type": "dashboard_lcd", "features": ["sensor-screen"] }
+  ],
+  "interactive": true
+}
