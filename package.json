@@ -1,0 +1,10 @@
+{
+  "name": "icue-widget-outlook-calendar",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Build scripts for the Outlook Calendar iCUE widget (requires icuewidget-cli)",
+  "scripts": {
+    "validate": "icuewidget validate .",
+    "package": "icuewidget package . -o dist/outlook-calendar.icuewidget"
+  }
+}
