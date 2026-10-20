@@ -1,0 +1,6 @@
+/* MediaViewer for iCUE widgets. Source: Corsair-Labs/icue-widget-builder
+ * (skills/icue-widget-builder/references/media-backgrounds.md), MIT License, Copyright (c) 2026 CORSAIR. */
+.position-container { position: absolute; transform-origin: top left; }
+.scale-container { transform-origin: top left; }
+.rotation-container { transform-origin: center center; }
+.rotation-container img, .rotation-container video { display: block; object-fit: contain; }
