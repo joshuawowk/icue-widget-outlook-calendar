@@ -20,5 +20,16 @@
     }
   ],
   "interactive": true,
-  "min_app_version": "5.52"
+  "min_app_version": "5.52",
+  "permissions": [
+    {
+      "type": "url",
+      "domain": "any"
+    },
+    {
+      "type": "url",
+      "domain": "localhost",
+      "port": 8585
+    }
+  ]
 }
