@@ -30,15 +30,17 @@ Gaming, Artistic, Monitoring, Engagement and Social; pick the closest one the co
 
 ## Release notes
 
-Version 1.0.1
+Version 1.0.2
 
+- Replaces the preview image with one rendered from sample data.
+- Packages only the files the widget loads; the preview image, README and this kit stay out of the `.icuewidget`.
 - Declares url network permissions in the manifest (`localhost:8585` and `any`).
 - Sets `min_app_version` to 5.52.
 - Bundles the media viewer inside the widget folder and self-closes the head elements, so the package passes the iCUE widget validator.
 - Replaces personal host defaults with generic ones.
 - Adds a SECURITY policy and a README Install section that points at the GitHub release.
 
-(Condensed from the GitHub release notes for v1.0.1 (`gh release view v1.0.1 -R joshuawowk/icue-widget-outlook-calendar`).)
+(Condensed from the GitHub release notes for v1.0.2 and v1.0.1 (`gh release view v1.0.2 -R joshuawowk/icue-widget-outlook-calendar`).)
 
 ## Requirements
 
@@ -47,7 +49,7 @@ Version 1.0.1
 - A CORSAIR Xeneon Edge (`dashboard_lcd` device).
 - xeneon-graph-proxy (https://github.com/joshuawowk/xeneon-graph-proxy) running and reachable from the PC, by default at `http://localhost:8585`. It is a companion service the user runs; the widget does not talk to Microsoft directly.
 - Calendar data in the proxy, fed either by Microsoft Graph device-code sign-in (if the tenant permits public clients) or by the browser-scrape ingest described in the widget README (a scheduled browser session posts normalized JSON to the proxy's `/ingest/calendar` endpoint).
-- Packaging status of the proxy is a snapshot: the v1.0.1 README says the `ghcr.io` container image was not yet published and the proxy must be built from source with `docker compose up -d --build`. Re-check with `gh release list -R joshuawowk/xeneon-graph-proxy` and the proxy README before submitting, and update this listing if the image is now published.
+- The proxy ships as a container image: `docker pull ghcr.io/joshuawowk/xeneon-graph-proxy:0.1.0` (linux/amd64, linux/arm64). See the proxy README for setup.
 
 ## Network permissions
 
@@ -66,14 +68,14 @@ MIT, see `LICENSE` in the repository root. Source: https://github.com/joshuawowk
 - Submission route unverified. Elgato's become-a-maker page lists Stream Deck, Wave Link, OBS and 3D as self-serve Maker
   Console categories but does not list iCUE widgets. If the console has no iCUE widget option, the fallback is the
   maker@elgato.com "New Product Submission" email route.
-- File to upload: `outlook-calendar.icuewidget`, the `.icuewidget` attached to GitHub release v1.0.1:
-  https://github.com/joshuawowk/icue-widget-outlook-calendar/releases/download/v1.0.1/outlook-calendar.icuewidget
+- File to upload: `outlook-calendar.icuewidget`, the `.icuewidget` attached to GitHub release v1.0.2:
+  https://github.com/joshuawowk/icue-widget-outlook-calendar/releases/download/v1.0.2/outlook-calendar.icuewidget
   Download it from the release; do not zip the folder by hand. To rebuild it, use `npm run package` (needs
   `npm install -g icuewidget-cli`).
-- Manifest version is 1.0.1 and the file above matches release v1.0.1. If you submit a later release, update the
+- Manifest version is 1.0.2 and the file above matches release v1.0.2. If you submit a later release, update the
   version, release notes and file name in this kit first.
 - Listing icon: `resources/icon.png` is 256x256 and was upscaled to 288x288 with ImageMagick (`convert resources/icon.png -resize 288x288!`), so it is slightly soft; re-export `resources/icon.svg` at 288 for a sharper icon if needed.
-- Packaging caveat: `npm run package` runs `icuewidget package .` on the repository root, which zips every non-hidden file. A `marketplace/` folder would therefore be swept into future `.icuewidget` builds (about 0.8 MB of PNGs and HTML). Nothing in this kit changes the package script; stage the widget files or exclude `marketplace/` before the next release build.
+- Packaging: `npm run package` (tools/package.js) stages only the files the widget loads, so `marketplace/`, the README and `resources/preview.png` stay out of the `.icuewidget`.
 - Validator note: `icuewidget validate` (CLI 0.5.0, run in October 2026 on the unzipped local `dist/` build of that version) passes with one warning that the `any` url permission grants access to every external host. The permission is intentional because the host is user-entered; expect reviewers to ask about it and point them at the Network permissions section.
 - Not tested on hardware: the kit was written without Windows, iCUE or a Xeneon Edge. Gallery slides show the shipped preview and text only; no screenshot was taken from a running panel.
 
@@ -82,11 +84,11 @@ MIT, see `LICENSE` in the repository root. Source: https://github.com/joshuawowk
 | File | Size | Use |
 | --- | --- | --- |
 | `listing-icon-288.png` | 288x288 | Product icon |
-| `gallery-01.png` | 1920x960 | Overview: product name and a crop of the widget header and first agenda item from `resources/preview.png` |
+| `gallery-01.png` | 1920x960 | Overview: product name and the full widget preview (`resources/preview.png`, rendered from sample data) |
 | `gallery-02.png` | 1920x960 | Feature cards: day grouping, countdown, busy marker, all-day filter, offline, sizing |
 | `gallery-03.png` | 1920x960 | Widget, xeneon-graph-proxy and the calendar source, setup steps and network permission |
 
-`resources/preview.png` is NOT used in full. Its lower rows contain what look like real calendar entries (including a work project name), and the gallery images must carry no real calendar content, so slide 1 uses only a crop of the header and the first generic agenda item ("Focus block") and the other slides are built from the feature list. `resources/preview.png` is also shipped inside the released `.icuewidget`; consider regenerating it from sample data.
+`resources/preview.png` was regenerated from sample data against a mock proxy on 2026-10-20 (the earlier image showed real entries). It is not part of the packaged widget.
 `marketplace/src/` holds the HTML sources and `marketplace/build.sh` re-renders the gallery PNGs with
 headless Chromium.
 

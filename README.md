@@ -13,7 +13,7 @@ An agenda-style Outlook calendar for the CORSAIR Xeneon Edge: dark theme, accent
 > docker run -d --name xeneon-graph-proxy --restart unless-stopped -p 8585:8585 -v xeneon-graph-proxy-data:/data ghcr.io/joshuawowk/xeneon-graph-proxy:latest
 > ```
 >
-> The `ghcr.io` image is not published yet at the time of writing. Until it is, build it from source with `docker compose up -d --build` as described in the [proxy README](https://github.com/joshuawowk/xeneon-graph-proxy#quick-start-docker). Then start sign-in once with `curl -X POST http://localhost:8585/auth/start` and follow the printed instructions.
+> Run the proxy from its published image, `ghcr.io/joshuawowk/xeneon-graph-proxy` (linux/amd64, linux/arm64); the [proxy README](https://github.com/joshuawowk/xeneon-graph-proxy#quick-start-docker) has the full `docker run` and compose setup. Then start sign-in once with `curl -X POST http://localhost:8585/auth/start` and follow the printed instructions.
 
 Microsoft Graph has no static API keys, so this widget pairs with **[xeneon-graph-proxy](https://github.com/joshuawowk/xeneon-graph-proxy)**. The proxy can be fed two ways:
 
