@@ -29,7 +29,7 @@ Microsoft Graph has no static API keys, so this widget pairs with **[xeneon-grap
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
-| Proxy URL | text | `http://192.168.0.160:8585` | Where xeneon-graph-proxy runs |
+| Proxy URL | text | `http://localhost:8585` | Where xeneon-graph-proxy runs |
 | Days Ahead | slider | 5 | 1–14 |
 | Hide All-Day Events | switch | off | |
 | Refresh Interval | slider | 5 min | 1–30 min |
